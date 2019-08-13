@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import styled from "styled-components"
 
-function App() {
+import './App.css';
+import { MainCardLayout } from "components/MainCardLayout"
+import { SpotlightInfo } from "components/SpotlightInfo"
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+`
+
+const Title = styled.h1`
+  font-size: 1.25rem;
+
+  @media only screen and (max-width : 769px) {
+    font-size: 1rem;
+  }
+`
+
+const Subtitle = styled.h2`
+  @media only screen and (max-width : 769px) {
+    font-size: 1.25rem;
+  }
+`
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainCardLayout>
+      <HeaderWrapper>
+        <Subtitle>This week's spotlight...</Subtitle>
+        <Title>Dev Spotlight</Title>
+      </HeaderWrapper>
+
+      <SpotlightInfo />
+    </MainCardLayout>
   );
 }
 

@@ -1,0 +1,87 @@
+const Prismic = require("prismic-javascript");
+const fs = require("fs");
+const { RichText } = require("prismic-dom");
+const axios = require("axios");
+
+const htmlSerializer = (type, element, content, children) => {
+  let html;
+
+  switch (type) {
+    case RichText.Elements.paragraph:
+      html = `<p>${children.join("")}</p>`;
+      break;
+    case RichText.Elements.list:
+      html = `<ul>${children.join("")}</ul>`;
+      break;
+    case RichText.Elements.heading2:
+      html = `<h2>${children.join("")}</h2>`;
+      break;
+    case RichText.Elements.heading3:
+      html = `<h3>${children.join("")}</h3>`;
+      break;
+    case RichText.Elements.heading4:
+      html = `<h4>${children.join("")}</h3>`;
+      break;
+    default:
+      html = null;
+      break;
+  }
+
+  return html;
+}
+
+const toHtml = data => RichText.asHtml(data, null, htmlSerializer);
+
+const getGithubData = (githubUrl) => {
+  const splitData = githubUrl.split('/')
+  const username = splitData[splitData.length - 1]
+  console.log(`Getting Github data for ${username}...`)
+
+  axios.get(`https://api.github.com/users/${username}/repos`).then(result => {
+    console.log("result", result.data)
+  })
+}
+
+/**
+ * Script run once a week to extract data of the spotlight from Prismic
+ * The data is then stored in a data/spotlightData.json file for us to use
+ */
+(() => {
+  console.info("Extracting Dev Spotlight data for this week...")
+
+  Prismic.getApi("https://dev-spotlight.cdn.prismic.io/api/v2").then((api) => {
+    return api.query(Prismic.Predicates.at('document.type', 'spotlight'));
+  }).then(({ results }) => {
+    const { data } = results[0];
+
+    console.log(data.description);
+
+    const spotlight = {
+      firstName: data.firstname[0].text,
+      lastName: data.lastname[0].text,
+      jobTitle: data.jobtitle[0].text,
+      age: data.age[0].text,
+      from: data.from[0].text,
+      currentlyIn: data.currentlyin[0].text,
+      gender: data.gender[0].text,
+      description: toHtml(data.description),
+      avatar: data.avatar.url,
+      company: data.company[0].text,
+      twitterUrl: data.twitterurl.url,
+      githubUrl: data.githuburl.url,
+      devUrl: data.devurl.url,
+      portfolioUrl: data.portfoliourl.url
+    }
+
+    // Get the person's top projects
+    if (spotlight.githubUrl) {
+      spotlight.projects = getGithubData(spotlight.githubUrl)
+    }
+
+    fs.writeFileSync("src/data/spotlightData.json", JSON.stringify(spotlight), (err) => {
+      console.error("❌ Error writing spotlight data", err);
+    })
+
+    console.log("✅ JSON data successfuly written");
+  })
+})()
