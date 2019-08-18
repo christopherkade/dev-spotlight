@@ -78,6 +78,8 @@ const App = () => {
           githubUrl={githubUrl}
           twitterUrl={twitterUrl}
           linkedinUrl={linkedinUrl}
+          jobTitle={jobTitle}
+          company={company}
         />
 
         <LeftLayout firstName={firstName} description={description} nextUp={nextUp} />

@@ -18,7 +18,17 @@ const Wrapper = styled.div`
   }
 `
 
-const CenterLayout = ({ avatar, gender, firstName, lastName, age, from, currentlyIn, portfolioUrl, devUrl, githubUrl, twitterUrl, linkedinUrl }) => {
+const DevJob = styled.h2`
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+
+  & > span {
+    color: #F6AE2D;
+  }
+`
+
+const CenterLayout = ({ avatar, gender, firstName, lastName, age, from, currentlyIn, portfolioUrl, devUrl, githubUrl, twitterUrl, linkedinUrl, company, jobTitle }) => {
   const getAvatar = () => {
     if (avatar) return avatar
     else if (gender === "female") return placeholderFemale
@@ -30,6 +40,10 @@ const CenterLayout = ({ avatar, gender, firstName, lastName, age, from, currentl
       <Avatar src={getAvatar()} alt={`${firstName} ${lastName}'s picture`} />
 
       <DevName>{firstName} {lastName}</DevName>
+
+      <DevJob>
+        {jobTitle} {company ? "at" : null} <span>{company}</span>
+      </DevJob>
 
       <DevTitles>
         <span>{age}</span> years old
