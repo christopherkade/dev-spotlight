@@ -32,16 +32,6 @@ const htmlSerializer = (type, element, content, children) => {
 
 const toHtml = data => RichText.asHtml(data, null, htmlSerializer);
 
-const getGithubData = (githubUrl) => {
-  const splitData = githubUrl.split('/')
-  const username = splitData[splitData.length - 1]
-  console.log(`Getting Github data for ${username}...`)
-
-  axios.get(`https://api.github.com/users/${username}/repos`).then(result => {
-    console.log("result", result.data)
-  })
-}
-
 /**
  * Script run once a week to extract data of the spotlight from Prismic
  * The data is then stored in a data/spotlightData.json file for us to use
@@ -54,8 +44,6 @@ const getGithubData = (githubUrl) => {
   }).then(({ results }) => {
     const { data } = results[0];
 
-    console.log(data.description);
-
     const spotlight = {
       firstName: data.firstname[0].text,
       lastName: data.lastname[0].text,
@@ -65,17 +53,27 @@ const getGithubData = (githubUrl) => {
       currentlyIn: data.currentlyin[0].text,
       gender: data.gender[0].text,
       description: toHtml(data.description),
+      nextUp: toHtml(data.nextup),
       avatar: data.avatar.url,
       company: data.company[0].text,
       twitterUrl: data.twitterurl.url,
       githubUrl: data.githuburl.url,
       devUrl: data.devurl.url,
-      portfolioUrl: data.portfoliourl.url
-    }
-
-    // Get the person's top projects
-    if (spotlight.githubUrl) {
-      spotlight.projects = getGithubData(spotlight.githubUrl)
+      portfolioUrl: data.portfoliourl.url,
+      linkedinUrl: data.linkedinurl.url,
+      projects: data.projects.map(project => {
+        return {
+          title: project.project_title[0].text,
+          description: project.project_description[0].text,
+          link: project.project_link.url
+        }
+      }),
+      articles: data.articles.map(article => {
+        return {
+          title: article.article_title[0].text,
+          link: article.article_link.url
+        }
+      })
     }
 
     fs.writeFileSync("src/data/spotlightData.json", JSON.stringify(spotlight), (err) => {

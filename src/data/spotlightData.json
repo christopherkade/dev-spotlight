@@ -1,1 +1,48 @@
-{"firstName":"Christopher","lastName":"Kade","jobTitle":"Front-end developer","age":"22","from":"Paris","currentlyIn":"Paris","gender":"male","description":"<p>Full-stack consultant working from Paris, France. I write about the Javascript ecosystem, CSS and best practices in software development.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","avatar":"https://dev-spotlight.cdn.prismic.io/dev-spotlight/4cf5480188875b6ea3c0a3770f44ada7d7d6fe70_photo.jpg","company":"Zenika","twitterUrl":"https://twitter.com/christo_kade","githubUrl":"https://github.com/christopherkade","devUrl":"https://dev.to/christopherkade","portfolioUrl":"https://christopherkade.com/"}
+{
+  "firstName": "Christopher",
+  "lastName": "Kade",
+  "jobTitle": "Front-end developer",
+  "age": "22",
+  "from": "Paris",
+  "currentlyIn": "Paris",
+  "gender": "male",
+  "description": "<p>Full-stack consultant working from Paris, France. I write about the Javascript ecosystem, CSS and best practices in software development.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+  "nextUp": "<p>I want to start doing talks about the Javascript ecosystem ! I also really want to do training sessions at my consulting first, this way I&#39;ll get to practice my presentation skills.</p>",
+  "avatar": "https://dev-spotlight.cdn.prismic.io/dev-spotlight/4cf5480188875b6ea3c0a3770f44ada7d7d6fe70_photo.jpg",
+  "company": "Zenika",
+  "twitterUrl": "https://twitter.com/christo_kade",
+  "githubUrl": "https://github.com/christopherkade",
+  "devUrl": "https://dev.to/christopherkade",
+  "portfolioUrl": "https://christopherkade.com/",
+  "linkedinUrl": "https://www.linkedin.com/in/christopher-kade/",
+  "projects": [
+    {
+      "title": "Project 01",
+      "description": "Description 01",
+      "link": "https://url.com"
+    },
+    {
+      "title": "Project 02",
+      "description": "Description 02",
+      "link": "https://url.com"
+    },
+    {
+      "title": "Project 03",
+      "description": "Description 03"
+    }
+  ],
+  "articles": [
+    {
+      "title": "Improving your Git workflow",
+      "link": "https://christopherkade.com/posts/git-workflow"
+    },
+    {
+      "title": "Writing elegant and resilient UI components",
+      "link": "https://christopherkade.com/posts/elegant-components"
+    },
+    {
+      "title": "Nuxt.js cheat sheet",
+      "link": "https://christopherkade.com/posts/nuxt-cheat-sheet"
+    }
+  ]
+}

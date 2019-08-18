@@ -1,41 +1,89 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 
-import './App.css';
-import { MainCardLayout } from "components/MainCardLayout"
-import { SpotlightInfo } from "components/SpotlightInfo"
+import { CenterLayout } from "components/CenterLayout"
+import { LeftLayout } from "components/LeftLayout"
+import { RightLayout } from "components/RightLayout"
+import { Spotlight } from "components/Spotlight"
+import {
+  firstName,
+  lastName,
+  jobTitle,
+  age,
+  from,
+  currentlyIn,
+  gender,
+  avatar,
+  company,
+  description,
+  nextUp,
+  twitterUrl,
+  portfolioUrl,
+  githubUrl,
+  devUrl,
+  linkedinUrl,
+  projects,
+  articles
+} from "data/spotlightData.json"
 
-const HeaderWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
-`
+  width: 100%;
+  height: 100%;
 
-const Title = styled.h1`
-  font-size: 1.25rem;
-
-  @media only screen and (max-width : 769px) {
-    font-size: 1rem;
+  @media screen and (max-width: 880px) {
+    height: auto;
   }
 `
 
-const Subtitle = styled.h2`
-  @media only screen and (max-width : 769px) {
-    font-size: 1.25rem;
+const Content = styled.div`
+  transition: all 1s;
+  opacity: ${props => props.displaySpotlight ? "1" : "0"};
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  @media screen and (max-width: 880px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
   }
 `
 
 const App = () => {
-  return (
-    <MainCardLayout>
-      <HeaderWrapper>
-        <Subtitle>This week's spotlight...</Subtitle>
-        <Title>Dev Spotlight</Title>
-      </HeaderWrapper>
+  const [spotlight, setSpotlight] = useState(false)
 
-      <SpotlightInfo />
-    </MainCardLayout>
+  useEffect(() => {
+    setSpotlight(true)
+  }, [])
+
+  return (
+    <Wrapper>
+      <Spotlight displaySpotlight={spotlight} />
+
+      <Content displaySpotlight={spotlight}>
+        <CenterLayout
+          firstName={firstName}
+          lastName={lastName}
+          avatar={avatar}
+          gender={gender}
+          age={age}
+          from={from}
+          currentlyIn={currentlyIn}
+          portfolioUrl={portfolioUrl}
+          devUrl={devUrl}
+          githubUrl={githubUrl}
+          twitterUrl={twitterUrl}
+          linkedinUrl={linkedinUrl}
+        />
+
+        <LeftLayout firstName={firstName} description={description} nextUp={nextUp} />
+        <RightLayout firstName={firstName} projects={projects} articles={articles} />
+      </Content>
+    </Wrapper>
   );
 }
 
