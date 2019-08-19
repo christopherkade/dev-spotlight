@@ -1,13 +1,14 @@
-<h1 align="center">Welcome to Dev Spotlight 👋</h1>
+<h1 align="center">Welcome to Dev Spotlight 🎉</h1>
 <p>
   <a href="https://twitter.com/christo_kade">
     <img alt="Twitter: christo_kade" src="https://img.shields.io/twitter/follow/christo_kade.svg?style=social" target="_blank" />
   </a>
 </p>
 
-> Weekly spotlight of amazing devs
+Dev Spotlight is a weekly celebration of amazing developers in our community.  
+Each week, we'll select a new person to highlight on this website !
 
-### 🏠 [Homepage](https://devspotlight.club)
+### 🏠 [Website](https://devspotlight.club)
 
 ## Author
 
