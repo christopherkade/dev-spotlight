@@ -12,7 +12,7 @@ const Wrapper = styled.p`
   }
 
   @media screen and (max-width: 880px) {
-    position: fixed;
+    display: none;
   }
 `
 

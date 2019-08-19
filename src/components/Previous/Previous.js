@@ -23,11 +23,22 @@ const StyledPrevious = styled.button`
   &:focus {
     outline: 1px solid #F6AE2D;
   }
+
+  @media screen and (max-width: 880px) {
+    position: fixed;
+    bottom: 8px;
+    margin: 0 0 4px 0;
+    font-size: 0.8rem;
+  }
 `
 
 const StyledArrow = styled.img`
   width: 24px;
   margin-right: 4px;
+
+  @media screen and (max-width: 880px) {
+    width: 16px;
+  }
 `
 
 const Previous = ({ setSpotlightIndex }) => {
