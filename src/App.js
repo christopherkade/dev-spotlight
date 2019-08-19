@@ -5,6 +5,8 @@ import { CenterLayout } from "components/CenterLayout"
 import { LeftLayout } from "components/LeftLayout"
 import { RightLayout } from "components/RightLayout"
 import { Spotlight } from "components/Spotlight"
+import { SpotlightIdeas } from "components/SpotlightIdeas"
+import { Stage } from "components/Stage"
 import {
   firstName,
   lastName,
@@ -35,6 +37,7 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 880px) {
     height: auto;
+    padding-bottom: 10vh;
   }
 `
 
@@ -85,6 +88,9 @@ const App = () => {
         <LeftLayout firstName={firstName} description={description} nextUp={nextUp} />
         <RightLayout firstName={firstName} projects={projects} articles={articles} />
       </Content>
+
+      <Stage />
+      <SpotlightIdeas />
     </Wrapper>
   );
 }
