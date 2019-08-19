@@ -29,9 +29,9 @@ const ProjectLink = styled.a`
 const Projects = ({ projects }) => {
   return (
     <>
-      {projects.length > 0 ? <Title>What are some of your favorite projects?</Title> : null}
+      {projects && projects.length > 0 ? <Title>What are some of your favorite projects you've made?</Title> : null}
 
-      {projects.map(project => {
+      {projects && projects.map(project => {
         return (
           <ProjectWrapper key={project.title} >
             <ProjectLink href={project.link}>

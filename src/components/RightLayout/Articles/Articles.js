@@ -28,9 +28,9 @@ const ArticleLink = styled.a`
 const Articles = ({ articles }) => {
   return (
     <ArticlesWrapper>
-      {articles.length > 0 ? <Title>Any articles you'd like to share?</Title> : null}
+      {articles && articles.length > 0 ? <Title>Any articles you'd like to share?</Title> : null}
 
-      {articles.map(article => {
+      {articles && articles.map(article => {
         return (
           <ArticleWrapper key={article.title} >
             <ArticleLink href={article.link}>

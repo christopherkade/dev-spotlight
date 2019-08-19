@@ -7,26 +7,9 @@ import { RightLayout } from "components/RightLayout"
 import { Spotlight } from "components/Spotlight"
 import { SpotlightIdeas } from "components/SpotlightIdeas"
 import { Stage } from "components/Stage"
-import {
-  firstName,
-  lastName,
-  jobTitle,
-  age,
-  from,
-  currentlyIn,
-  gender,
-  avatar,
-  company,
-  description,
-  nextUp,
-  twitterUrl,
-  portfolioUrl,
-  githubUrl,
-  devUrl,
-  linkedinUrl,
-  projects,
-  articles
-} from "data/spotlightData.json"
+import { Previous } from "components/Previous"
+import { Next } from "components/Next"
+import spotlights from "data/spotlightData.json"
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,7 +40,28 @@ const Content = styled.div`
 `
 
 const App = () => {
+  const [spotlightIndex, setSpotlightIndex] = useState(0)
   const [spotlight, setSpotlight] = useState(false)
+  const {
+    firstName,
+    lastName,
+    jobTitle,
+    age,
+    from,
+    currentlyIn,
+    gender,
+    avatar,
+    company,
+    description,
+    nextUp,
+    twitterUrl,
+    portfolioUrl,
+    githubUrl,
+    devUrl,
+    linkedinUrl,
+    projects,
+    articles
+  } = spotlights[spotlightIndex]
 
   useEffect(() => {
     setSpotlight(true)
@@ -91,6 +95,9 @@ const App = () => {
 
       <Stage />
       <SpotlightIdeas />
+
+      {spotlightIndex === spotlights.length - 1 ? null : <Previous setSpotlightIndex={setSpotlightIndex} />}
+      {spotlightIndex > 0 ? <Next setSpotlightIndex={setSpotlightIndex} /> : null}
     </Wrapper>
   );
 }

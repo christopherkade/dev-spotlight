@@ -33,50 +33,50 @@ const htmlSerializer = (type, element, content, children) => {
 const toHtml = data => RichText.asHtml(data, null, htmlSerializer);
 
 /**
- * Script run once a week to extract data of the spotlight from Prismic
+ * Script run once a week to extract spotlight data from Prismic
  * The data is then stored in a data/spotlightData.json file for us to use
  */
 (() => {
   console.info("Extracting Dev Spotlight data for this week...")
 
   Prismic.getApi("https://dev-spotlight.cdn.prismic.io/api/v2").then((api) => {
-    return api.query(Prismic.Predicates.at('document.type', 'spotlight'));
+    return api.query(Prismic.Predicates.at('document.type', 'devspotlight'));
   }).then(({ results }) => {
-    const { data } = results[0];
+    const spotlightArray = results.map(({ data }) => {
+      return {
+        firstName: data.firstname[0].text,
+        lastName: data.lastname[0].text,
+        jobTitle: data.jobtitle[0].text,
+        age: data.age[0].text,
+        from: data.from[0].text,
+        currentlyIn: data.currentlyin[0].text,
+        gender: data.gender[0].text,
+        description: toHtml(data.description),
+        nextUp: toHtml(data.nextup),
+        avatar: data.avatar.url,
+        company: data.company[0].text,
+        twitterUrl: data.twitterurl.url,
+        githubUrl: data.githuburl.url,
+        devUrl: data.devurl.url,
+        portfolioUrl: data.portfoliourl.url,
+        linkedinUrl: data.linkedinurl.url,
+        projects: data.projects && data.projects.map(project => {
+          return {
+            title: project.project_title && project.project_title[0].text,
+            description: project.project_description && project.project_description[0].text,
+            link: project.project_link.url
+          }
+        }),
+        articles: data.articles && data.articles.map(article => {
+          return {
+            title: article.article_title && article.article_title[0].text,
+            link: article.article_link.url
+          }
+        })
+      }
+    })
 
-    const spotlight = {
-      firstName: data.firstname[0].text,
-      lastName: data.lastname[0].text,
-      jobTitle: data.jobtitle[0].text,
-      age: data.age[0].text,
-      from: data.from[0].text,
-      currentlyIn: data.currentlyin[0].text,
-      gender: data.gender[0].text,
-      description: toHtml(data.description),
-      nextUp: toHtml(data.nextup),
-      avatar: data.avatar.url,
-      company: data.company[0].text,
-      twitterUrl: data.twitterurl.url,
-      githubUrl: data.githuburl.url,
-      devUrl: data.devurl.url,
-      portfolioUrl: data.portfoliourl.url,
-      linkedinUrl: data.linkedinurl.url,
-      projects: data.projects.map(project => {
-        return {
-          title: project.project_title[0].text,
-          description: project.project_description[0].text,
-          link: project.project_link.url
-        }
-      }),
-      articles: data.articles.map(article => {
-        return {
-          title: article.article_title[0].text,
-          link: article.article_link.url
-        }
-      })
-    }
-
-    fs.writeFileSync("src/data/spotlightData.json", JSON.stringify(spotlight), (err) => {
+    fs.writeFileSync("src/data/spotlightData.json", JSON.stringify(spotlightArray), (err) => {
       console.error("❌ Error writing spotlight data", err);
     })
 
