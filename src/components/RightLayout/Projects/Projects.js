@@ -29,7 +29,7 @@ const ProjectLink = styled.a`
 const Projects = ({ projects }) => {
   return (
     <>
-      {projects && projects.length > 0 ? <Title>What are some of your favorite projects you've made?</Title> : null}
+      {projects && projects.length > 0 ? <Title>What's your top 3 personal projects?</Title> : null}
 
       {projects && projects.map(project => {
         return (
