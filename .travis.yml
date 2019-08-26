@@ -13,7 +13,7 @@ deploy:
   github-token: $GITHUB_TOKEN
   local_dir: ./build
   repo: christopherkade/dev-spotlight
-  fqdn: devspotlight.club
+  fqdn: www.devspotlight.club
   target_branch: gh-pages
   on:
     branch: master
